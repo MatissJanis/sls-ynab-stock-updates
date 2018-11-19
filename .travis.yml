@@ -7,3 +7,6 @@ cache:
 script:
     - "echo 'TRAVIS: true' >> serverless.env.yml"
     - npm run deploy
+branches:
+  only:
+  - master
