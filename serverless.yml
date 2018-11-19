@@ -15,7 +15,7 @@ custom:
         topic: ${self:service}-alerts-alarm
         notifications:
           - protocol: email
-            endpoint: ${file(serverless.env.yml):AWS_ALARM_EMAIL, env:AWS_ALARM_EMAIL}
+            endpoint: ${file(serverless.env.yml):ALARM_EMAIL, env:ALARM_EMAIL}
     alarms:
       - functionErrors
 
