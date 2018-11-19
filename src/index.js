@@ -2,7 +2,6 @@ const yahooFinance = require('yahoo-finance');
 const ynab = require('ynab');
 
 module.exports.run = async (event, context, callback) => {
-  try {
   const ynabAPI = new ynab.API(process.env.YNAB_API_TOKEN);
   const automaticApproval = process.env.AUTOMATIC_APPROVAL === true || process.env.AUTOMATIC_APPROVAL === 'true';
   const transactions = [];
@@ -65,7 +64,4 @@ module.exports.run = async (event, context, callback) => {
   }
 
   callback(null, `Created ${transactions.length} transactions.`);
-} catch (e) {
-  callback(e);
-}
 }
