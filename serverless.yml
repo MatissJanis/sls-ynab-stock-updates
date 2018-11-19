@@ -6,7 +6,9 @@ provider:
   runtime: nodejs8.10
   timeout: 5
   versionFunctions: false
-  environment: ${file(./serverless.env.yml)}
+  environment:
+    YNAB_API_TOKEN: ${file(serverless.env.yml):YNAB_API_TOKEN, env:YNAB_API_TOKEN}
+    AUTOMATIC_APPROVAL: ${file(serverless.env.yml):AUTOMATIC_APPROVAL, env:AUTOMATIC_APPROVAL}
 
 custom:
   alerts:
