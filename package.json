@@ -1,0 +1,34 @@
+{
+  "name": "sls-ynab-stock-updates",
+  "version": "1.0.0",
+  "description": "Serverless function to automatically update balance of investment accounts in YNAB.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatissJanis/sls-ynab-stock-updates.git"
+  },
+  "keywords": [
+    "serverless",
+    "stock",
+    "fintech",
+    "ynab"
+  ],
+  "author": "Matiss Janis Aboltins <matiss@mja.lv>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MatissJanis/sls-ynab-stock-updates/issues"
+  },
+  "homepage": "https://github.com/MatissJanis/sls-ynab-stock-updates#readme",
+  "devDependencies": {
+    "serverless": "^1.33.1",
+    "serverless-plugin-aws-alerts": "^1.2.4"
+  },
+  "dependencies": {
+    "yahoo-finance": "^0.3.5",
+    "ynab": "^1.9.0"
+  },
+  "scripts": {
+    "start": "serverless invoke local -f ynab-stock-update",
+    "deploy": "serverless deploy --conceal -s production"
+  }
+}

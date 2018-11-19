@@ -1,0 +1,29 @@
+service: stock-alarms
+
+provider:
+  name: aws
+  region: eu-west-1
+  runtime: nodejs8.10
+  timeout: 5
+  versionFunctions: false
+  environment: ${file(./serverless.env.yml)}
+
+custom:
+  alerts:
+    topics:
+      alarm:
+        topic: ${self:service}-alerts-alarm
+        notifications:
+          - protocol: email
+            endpoint: ${file(serverless.env.yml):AWS_ALARM_EMAIL, env:AWS_ALARM_EMAIL}
+    alarms:
+      - functionErrors
+
+functions:
+  ynab-stock-update:
+    handler: src/index.run
+    events:
+      - schedule: rate(1 hour)
+
+plugins:
+  - serverless-plugin-aws-alerts
