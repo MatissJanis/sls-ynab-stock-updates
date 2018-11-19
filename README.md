@@ -32,7 +32,7 @@ cp serverless.env.example.yml serverless.env.yml
 
 3. Set the environment variables
   - `YNAB_API_TOKEN`: personal API token generated in the [YNAB homepage](https://app.youneedabudget.com/settings/developer).
-  - `AUTOMATIC_APPROVAL`: should the automatic balance adjustment transactions be auto-approved? Useful to set this to `true` if you are running this function hourly/daily and don't want to go through streams of transactions.
+  - `AUTOMATIC_APPROVAL`: should the automatic balance adjustment transactions be auto-approved? Useful to set this to `true` if you are running this function hourly/daily/weekly/etc and don't want to go through streams of transactions.
   - `ALARM_EMAIL`: what email should be notified if the function starts malfunctioning and throwing errors?
 
 4. Deploy the function
