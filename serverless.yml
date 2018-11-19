@@ -1,4 +1,4 @@
-service: stock-alarms
+service: ynab-stock-update
 
 provider:
   name: aws

@@ -53,7 +53,7 @@ module.exports.run = async (event, context, callback) => {
         transaction: {
           account_id: account.id,
           amount: diffPrice,
-          date: (new Date).toISOString().substr(0, 10),
+          date: ynab.utils.getCurrentDateInISOFormat(),
           memo: 'Automatic investment account update',
           approved: automaticApproval,
         },
