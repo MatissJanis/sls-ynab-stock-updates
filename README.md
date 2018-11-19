@@ -1,6 +1,6 @@
 # sls-ynab-stock-updates
 
-[![Build Status](https://travis-ci.org/brokalys/sls-ynab-stock-updates.svg?branch=master)](https://travis-ci.org/brokalys/sls-ynab-stock-updates)
+[![Build Status](https://travis-ci.org/MatissJanis/sls-ynab-stock-updates.svg?branch=master)](https://travis-ci.org/MatissJanis/sls-ynab-stock-updates)
 
 Serverless function to automatically update investment account balances in YNAB.
 
