@@ -4,6 +4,15 @@
 
 Serverless function to automatically update investment account balances in YNAB.
 
+## Requirements
+- Node
+- NPM
+
+## Installation
+```sh
+npm install
+```
+
 ## Setup
 There are a few preliminary steps that must be taken to start using this serverless function.
 
@@ -29,15 +38,6 @@ cp serverless.env.example.yml serverless.env.yml
 4. Deploy the function
 ```sh
 npm run deploy
-```
-
-## Requirements
-- Node
-- NPM
-
-## Installation
-```sh
-npm install
 ```
 
 ## Development
