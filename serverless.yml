@@ -18,6 +18,10 @@ custom:
         notifications:
           - protocol: email
             endpoint: ${file(serverless.env.yml):ALARM_EMAIL, env:ALARM_EMAIL}
+    definitions:
+      functionErrors:
+        period: 86400 # 1 day
+        treatMissingData: notBreaching
     alarms:
       - functionErrors
 
