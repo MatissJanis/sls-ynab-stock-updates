@@ -29,7 +29,7 @@ functions:
   ynab-stock-update:
     handler: src/index.run
     events:
-      - schedule: cron(0 23 ? * MON-FRI *)
+      - schedule: cron(0 23 ? * 2-6 *)
 
 plugins:
   - serverless-plugin-aws-alerts
