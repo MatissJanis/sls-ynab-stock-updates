@@ -9,6 +9,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: npm run deploy -- --conceal
+  script: npm run deploy
   on:
     branch: master
