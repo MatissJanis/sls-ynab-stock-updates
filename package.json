@@ -2,7 +2,9 @@
   "name": "sls-ynab-stock-updates",
   "version": "1.0.0",
   "description": "Serverless function to automatically update balance of investment accounts in YNAB.",
-  "main": "src/index.js",
+  "author": "Matiss Janis Aboltins <matiss@mja.lv>",
+  "license": "MIT",
+  "homepage": "https://github.com/MatissJanis/sls-ynab-stock-updates#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MatissJanis/sls-ynab-stock-updates.git"
@@ -13,22 +15,31 @@
     "fintech",
     "ynab"
   ],
-  "author": "Matiss Janis Aboltins <matiss@mja.lv>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MatissJanis/sls-ynab-stock-updates/issues"
-  },
-  "homepage": "https://github.com/MatissJanis/sls-ynab-stock-updates#readme",
-  "devDependencies": {
-    "serverless": "^1.33.1",
-    "serverless-plugin-aws-alerts": "^1.2.4"
+  "scripts": {
+    "start": "serverless invoke local -f ynab-stock-update",
+    "deploy": "serverless deploy --conceal -s production"
   },
   "dependencies": {
     "yahoo-finance": "^0.3.5",
     "ynab": "^1.9.0"
   },
-  "scripts": {
-    "start": "serverless invoke local -f ynab-stock-update",
-    "deploy": "serverless deploy --conceal -s production"
+  "devDependencies": {
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.5",
+    "prettier": "1.18.2",
+    "serverless": "^1.51.0",
+    "serverless-plugin-aws-alerts": "^1.4.0"
+  },
+  "main": "src/index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
