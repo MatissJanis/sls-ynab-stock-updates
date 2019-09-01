@@ -3,7 +3,9 @@ const ynab = require("ynab");
 
 module.exports.run = async (event, context, callback) => {
   const ynabAPI = new ynab.API(process.env.YNAB_API_TOKEN);
-  const automaticApproval = Boolean(process.env.AUTOMATIC_APPROVAL === true);
+  const automaticApproval =
+    process.env.AUTOMATIC_APPROVAL === true ||
+    process.env.AUTOMATIC_APPROVAL === "true";
   const transactions = [];
 
   // Retrieve all the budgets
