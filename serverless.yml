@@ -3,7 +3,7 @@ service: ynab-stock-update
 provider:
   name: aws
   region: eu-west-1
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   timeout: 5
   versionFunctions: false
   environment:
