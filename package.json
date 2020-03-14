@@ -21,13 +21,13 @@
   },
   "dependencies": {
     "yahoo-finance": "^0.3.5",
-    "ynab": "^1.9.0"
+    "ynab": "^1.18.0"
   },
   "devDependencies": {
-    "husky": "^3.0.4",
-    "lint-staged": "^9.2.5",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "prettier": "1.18.2",
-    "serverless": "^1.51.0",
+    "serverless": "^1.66.0",
     "serverless-plugin-aws-alerts": "^1.4.0"
   },
   "main": "src/index.js",
