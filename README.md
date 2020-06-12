@@ -37,6 +37,7 @@ cp serverless.env.example.yml serverless.env.yml
 
 - `YNAB_API_TOKEN`: personal API token generated in the [YNAB homepage](https://app.youneedabudget.com/settings/developer).
 - `AUTOMATIC_APPROVAL`: should the automatic balance adjustment transactions be auto-approved? Useful to set this to `true` if you are running this function hourly/daily/weekly/etc and don't want to go through streams of transactions.
+- `AUTOMATIC_CURRENCY_CONVERSION`: should automatic currency conversion be turned on? Converts to budgets base currency. Useful if, you have assets in multiple currencies and they are all in one account.
 - `ALARM_EMAIL`: what email should be notified if the function starts malfunctioning and throwing errors?
 
 4. Deploy the function

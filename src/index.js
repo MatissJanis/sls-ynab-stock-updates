@@ -7,6 +7,9 @@ module.exports.run = async (event, context, callback) => {
   const automaticApproval =
     process.env.AUTOMATIC_APPROVAL === true ||
     process.env.AUTOMATIC_APPROVAL === "true";
+  const currencyConversionEnabled =
+    process.env.AUTOMATIC_CURRENCY_CONVERSION === true ||
+    process.env.AUTOMATIC_CURRENCY_CONVERSION === "true";
   const transactions = [];
 
   // Retrieve all the budgets
@@ -53,7 +56,7 @@ module.exports.run = async (event, context, callback) => {
           ].price;
 
           const currencyConversionRate =
-            currency === budgetCurrency
+            currency === budgetCurrency || !currencyConversionEnabled
               ? 1
               : await convert(1, budgetCurrency, currency);
 

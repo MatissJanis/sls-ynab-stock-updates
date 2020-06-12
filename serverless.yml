@@ -9,6 +9,7 @@ provider:
   environment:
     YNAB_API_TOKEN: ${file(serverless.env.yml):YNAB_API_TOKEN, env:YNAB_API_TOKEN}
     AUTOMATIC_APPROVAL: ${file(serverless.env.yml):AUTOMATIC_APPROVAL, env:AUTOMATIC_APPROVAL}
+    AUTOMATIC_CURRENCY_CONVERSION: ${file(serverless.env.yml):AUTOMATIC_CURRENCY_CONVERSION, env:AUTOMATIC_CURRENCY_CONVERSION}
 
 custom:
   alerts:
