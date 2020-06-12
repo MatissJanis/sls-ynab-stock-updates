@@ -20,6 +20,7 @@
     "deploy": "serverless deploy --conceal -s production"
   },
   "dependencies": {
+    "exchange-rates-api": "^1.0.2",
     "yahoo-finance": "^0.3.5",
     "ynab": "^1.18.0"
   },

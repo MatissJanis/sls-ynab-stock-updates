@@ -1,5 +1,6 @@
 const yahooFinance = require("yahoo-finance");
 const ynab = require("ynab");
+const { convert } = require("exchange-rates-api");
 
 module.exports.run = async (event, context, callback) => {
   const ynabAPI = new ynab.API(process.env.YNAB_API_TOKEN);
@@ -13,12 +14,14 @@ module.exports.run = async (event, context, callback) => {
   const budgets = budgetsResponse.data.budgets;
 
   for (const budget of budgets) {
+    const budgetCurrency = budget.currency_format.iso_code;
+
     // Retrieve accounts of budgets
     const accountsResponse = await ynabAPI.accounts.getAccounts(budget.id);
     const accounts = accountsResponse.data.accounts;
 
     // Filter out only the configured investment accounts
-    const investmentAccounts = accounts.filter(account =>
+    const investmentAccounts = accounts.filter((account) =>
       /^INVESTMENTS:/i.test(account.note || "")
     );
 
@@ -27,29 +30,40 @@ module.exports.run = async (event, context, callback) => {
       const investments = account.note
         .replace(/^INVESTMENTS:/i, "")
         .split(",")
-        .map(row => {
+        .map((row) => {
           const parts = row.trim().match(/^(.*)[\s\t]+([0-9]+)$/);
 
           return {
             symbol: parts[1],
-            amount: parseInt(parts[2], 10)
+            amount: parseInt(parts[2], 10),
           };
         });
 
       // Retrieve prices of all stock symbols
       const prices = await yahooFinance.quote({
         symbols: investments.map(({ symbol }) => symbol),
-        modules: ["price"]
+        modules: ["price"],
       });
 
       // Calculate the total price of the portfolio
-      const totalPrice = investments
-        .map(
-          investment =>
-            prices[investment.symbol].price.regularMarketPrice *
-            investment.amount
-        )
-        .reduce((a, b) => a + b, 0);
+      const individualPrices = await Promise.all(
+        investments.map(async (investment) => {
+          const { regularMarketPrice, currency } = prices[
+            investment.symbol
+          ].price;
+
+          const currencyConversionRate =
+            currency === budgetCurrency
+              ? 1
+              : await convert(1, budgetCurrency, currency);
+
+          return (
+            regularMarketPrice * investment.amount * currencyConversionRate
+          );
+        })
+      );
+
+      const totalPrice = individualPrices.reduce((a, b) => a + b, 0);
 
       // Calculate the diff from the current account value
       const diffPrice = parseInt(totalPrice * 1000, 10) - account.balance;
@@ -68,8 +82,8 @@ module.exports.run = async (event, context, callback) => {
             amount: diffPrice,
             date: ynab.utils.getCurrentDateInISOFormat(),
             memo: "Automatic investment account update",
-            approved: automaticApproval
-          }
+            approved: automaticApproval,
+          },
         }
       );
 
