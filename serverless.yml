@@ -21,7 +21,14 @@ custom:
             endpoint: ${file(serverless.env.yml):ALARM_EMAIL, env:ALARM_EMAIL}
     definitions:
       functionErrors:
+        namespace: 'AWS/Lambda'
+        metric: Errors
+        threshold: 1
+        statistic: Sum
         period: 86400 # 1 day
+        evaluationPeriods: 3
+        datapointsToAlarm: 3
+        comparisonOperator: GreaterThanOrEqualToThreshold
         treatMissingData: notBreaching
     alarms:
       - functionErrors
