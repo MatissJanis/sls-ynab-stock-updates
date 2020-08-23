@@ -26,8 +26,8 @@ custom:
         threshold: 1
         statistic: Sum
         period: 86400 # 1 day
-        evaluationPeriods: 3
-        datapointsToAlarm: 3
+        evaluationPeriods: 1
+        datapointsToAlarm: 1
         comparisonOperator: GreaterThanOrEqualToThreshold
         treatMissingData: notBreaching
     alarms:
@@ -39,5 +39,5 @@ functions:
     events:
       - schedule: cron(0 23 ? * 2-6 *)
 
-plugins:
-  - serverless-plugin-aws-alerts
+# plugins:
+#   - serverless-plugin-aws-alerts
