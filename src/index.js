@@ -1,6 +1,13 @@
 const yahooFinance = require("yahoo-finance");
 const ynab = require("ynab");
-const { convert } = require("exchange-rates-api");
+
+async function convertCurrency(from, to) {
+  const response = await fetch(
+    `https://api.exchangerate.host/convert?from=${from}&to=${to}`
+  );
+  const data = await response.json();
+  return data.result;
+}
 
 module.exports.run = async (event, context, callback) => {
   const ynabAPI = new ynab.API(process.env.YNAB_API_TOKEN);
@@ -58,7 +65,7 @@ module.exports.run = async (event, context, callback) => {
           const currencyConversionRate =
             currency === budgetCurrency || !currencyConversionEnabled
               ? 1
-              : await convert(1, budgetCurrency, currency);
+              : await convertCurrency(currency, budgetCurrency);
 
           return (
             regularMarketPrice * investment.amount * currencyConversionRate

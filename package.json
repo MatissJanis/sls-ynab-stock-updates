@@ -20,16 +20,15 @@
     "deploy": "serverless deploy --conceal -s production"
   },
   "dependencies": {
-    "exchange-rates-api": "^1.0.2",
-    "yahoo-finance": "^0.3.5",
-    "ynab": "^1.20.0"
+    "yahoo-finance": "^0.3.7",
+    "ynab": "^1.23.0"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
-    "serverless": "^1.79.0",
-    "serverless-plugin-aws-alerts": "^1.6.1"
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "serverless": "^1.83.3",
+    "serverless-plugin-aws-alerts": "^1.7.2"
   },
   "main": "src/index.js",
   "husky": {
